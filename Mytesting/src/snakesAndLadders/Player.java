@@ -4,6 +4,7 @@
  */
 package snakesAndLadders;
 
+//start position is 0
 public class Player {
   public Player(String name) {
     this.name = name;
@@ -28,8 +29,16 @@ public class Player {
     this.position = position;
   }
 
-  public void move(int position) {
-    this.setPosition(position);
+  public int move(int numberDrawn, int maximumPosition) {
+    int newPosition=this.position + numberDrawn;
+    if (newPosition <= maximumPosition) {
+      this.setPosition(newPosition);
+    }
+    return position;
+  }
+
+  public int rollDice() {
+    return Dice.roll();
   }
 
 }

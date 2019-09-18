@@ -4,30 +4,34 @@
  */
 package snakesAndLadders;
 
+//fixed start and end position
 public class Snake {
 
-  int startPosition;
-  int endPosition;
+  int mouth;
+  int tail;
 
-  public Snake(int startPosition, int endPosition) {
-    this.startPosition = startPosition;
-    this.endPosition = endPosition;
+  public Snake(int mouth, int tail) {
+    if (mouth < tail) {
+      throw new IllegalArgumentException("Snake is invalid");
+    }
+    this.mouth = mouth;
+    this.tail = tail;
   }
 
-  public int getStartPosition() {
-    return startPosition;
+  public int getMouth() {
+    return mouth;
   }
 
-  public void setStartPosition(int startPosition) {
-    this.startPosition = startPosition;
+  public void setMouth(int mouth) {
+    this.mouth = mouth;
   }
 
-  public int getEndPosition() {
-    return endPosition;
+  public int getTail() {
+    return tail;
   }
 
-  public void setEndPosition(int endPosition) {
-    this.endPosition = endPosition;
+  public void setTail(int tail) {
+    this.tail = tail;
   }
 
 }
