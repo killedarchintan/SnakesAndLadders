@@ -1,3 +1,9 @@
 git init 
 git add -A
 git commit -m "comment"
+
+Snakes and ladders
+identify nouns
+nouns:- 
+Board, Players, Dice
+you have to take assumption in design, sometimes it reduces the scope and soemtimes it increases.
