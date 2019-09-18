@@ -7,7 +7,7 @@ package snakesAndLadders;
 public class Player {
   public Player(String name) {
     this.name = name;
-    this.position = 1;
+    this.position = 0;
   }
   private String name;
   private Integer position;
@@ -26,6 +26,10 @@ public class Player {
 
   public void setPosition(Integer position) {
     this.position = position;
+  }
+
+  public void move(int position) {
+    this.setPosition(position);
   }
 
 }

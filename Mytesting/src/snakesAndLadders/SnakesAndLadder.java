@@ -10,29 +10,38 @@ public class SnakesAndLadder {
 
   public static void main(String[] args) {
 
+    SnakesAndLadder theGame = new SnakesAndLadder();
     Player player = new Player("komal");
+    Snake snake = new Snake(4, 2);
     Board board = new Board();
-    int numberDrawn = throwDice(player);
-    System.err.println("Number drawn: " + numberDrawn);
-    int position = move(player, board, numberDrawn);
-    player.setPosition(position);
-    System.out.println("player name " + player.getName() + "new position :" + position);
+    int position = 0;
+
+    while (player.getPosition() < board.getSize()) {
+      int numberDrawn = Dice.roll();
+      System.out.println("Number drawn: " + numberDrawn);
+      position = theGame.calculateNewPosition(player, board, numberDrawn, snake);
+
+      player.move(position);
+      System.out.println("player name " + player.getName() + "new position :" + position);
+
+    }
+    System.out.println("THE WINNER :- " + player.getName());
 
   }
 
-  private static Integer move(Player player, Board board, int numberDrawn) {
-    if (player.getPosition() + numberDrawn <= board.getSize()) {
-      int newPosition = player.getPosition() + numberDrawn;
+  private Integer calculateNewPosition(Player player, Board board, int numberDrawn, Snake snake) {
+    Integer newPosition = player.getPosition() + numberDrawn;
+    if (newPosition <= board.getSize() && newPosition != snake.getStartPosition()) {
       return newPosition;
+    } else if (newPosition == snake.getStartPosition()) {
+      System.out.println("HISSsssssssss" + "You have been bitten by a snake");
+      return snake.getEndPosition();
     } else {
       System.out.println("wait for your turn");
       return player.getPosition();
     }
   }
 
-  private static int throwDice(Player player) {
-    Random r = new Random();
-    return r.nextInt(6);
-  }
+
 
 }
