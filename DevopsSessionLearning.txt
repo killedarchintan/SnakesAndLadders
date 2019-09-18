@@ -1,0 +1,239 @@
+Learning from the DEv-ops session
+
+Day1.
+1. Initialize the git
+git init
+copy con password.txt
+admin@123
+^z
+
+copy con readme.md
+WelcomeTo the devops
+^z
+
+do git commit , you cannot do git commit until you login to the git local repo
+
+git config --global user.email ""
+git config --global user.name ""
+
+git add *
+git commit -m "first commit"
+git remote add origin https://github.com/killedarchintan/DevopsWS1.git
+git push -u origin master
+
+
+2. Add jenkins support in gitHub
+
+Go to settings , go to webhooks and
+in payload URL mention jenkins URL
+
+secret--> key issued by jenkins
+secret key can be generated on the jenkins
+
+
+3. Java
+|-- maven
+	|-- xml based(pom.xml) ( cannot do if, else when performing a build)
+|-- gradle
+	|-- groovy based ( need to know gradle)
+gradle is a superset/derieved logic from Maven ( improvement on maven)
+
+4. Download a maven project from spring initiazlr
+unzip and do mvn clean and then mvn compile and then mvn package to create a jar, ear
+ 
+mvn eclipse:eclipse for making a project compatible with eclipse
+
+mvn clean
+mvn compile 
+mvn package
+mvn test
+mvn install
+mvn deploy
+
+
+Day2
+mirantis, fuelcloud, openstack are APIs to build your own cloud.
+cloudbees is paid edition of jenkins
+coverage reports--jacoco, Unit Test report-Junit, sanity report-sonarQube 
+
+Jenkins
+Go to jenkins 
+-->Create secret from credentials-->jenkins-->globalCredential-->add Crednetials
+-->go to manage jenkins-->manage plugins--> available--> install generic webhook trigger and build pipeline
+-->go to manage jenkins-->global tool configuration-->
+add gradle
+add maven
+add JDK
+-->New Item-->Freestyle project --> 
+in Source code management -->select git and give path of your github repo  "https://github.com/killedarchintan/DevopsWS1.git"
+in build triggers--> select generic webhooks trigger --> add Token
+in add build step--> invoke top-level maven repo--> give earlier defined maven
+in add post build actions --> publish Junit test result report--> target/surefire-reports/*.xml
+
+
+GitHUB
+click on + and go to New repository
+-->give any repor name 
+--> create repo
+--> go to clone/download and copy the link "https://github.com/killedarchintan/DevopsWS1.git"
+Go to your desktop
+1. Initialize the git
+git init
+git config --global user.email "__"
+git config --global user.name "__"
+git add *
+git commit -m "first commit"
+git remote add origin https://github.com/killedarchintan/DevopsWS1.git
+git push -u origin master
+
+
+Sonar
+--> go to sonar folder and 
+C:\sonarqube-7.3\bin\windows-x86-64\startSonar
+this will start the server
+-->Go to cmd and and your project and do 
+mvn sonar:sonar
+
+code instrumentation
+process of going through the compile code with the test cases in order to come up with code coverage 
+
+Day3.
+Types of virtualization
+1. hyper***
+2. Libvert
+
+Pipleline build
+node {
+   def mvnHome
+   stage('Preparation') { // for display purposes
+      git 'https://github.com/killedarchintan/DevopsNilesh'
+      mvnHome = tool 'M3'
+   }
+   stage('Build') {
+      if (isUnix()) {
+         sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
+      } else {
+         bat(/"${mvnHome}\bin\mvn" -Dmaven.test.failure.ignore clean package/)
+      }
+   }
+   stage('Results') {
+      junit '**/target/surefire-reports/TEST-*.xml'
+      archive 'target/*.jar'
+   }
+   
+   stage('Scan') {
+      if (isUnix()) {
+         sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
+      } else {
+         bat(/"${mvnHome}\bin\mvn" sonar:sonar /)
+      }
+   }
+   stage('Deploy') {
+      if (isUnix()) {
+         sh "'${mvnHome}/bin/mvn' sonar:sonar"
+      } else {
+         bat(/"${mvnHome}\bin\mvn" deploy /)
+      }
+   }  
+      
+      stage('extra1') {
+      if (isUnix()) {
+         sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
+      } else {
+         bat(/"${mvnHome}\bin\mvn" sonar:sonar /)
+      }
+      }
+   stage('Scan1') {
+}
+   
+   stage('Scan2') {
+   }
+   
+}
+
+Docker
+docker pull <imagename> (docker pull will pull image and cache in the local repo)
+Ex:- docker pull tomcat
+
+docker create // allows you to create a container how ever it does not start the container
+if you want to find all the images that are already downloaded
+
+docker images // list the images in the docker
+
+how do i know how many running container
+docker ps
+
+How do I know all the containers running as well as stopped 
+docker ps -a
+
+docker rm <containerId>|<containerName>
+
+how to delete a image 
+docker rmi <imageid>|<imageName>
+
+docker start <containerId>|<containerName> // starts a stopped container
+
+docker stop <containerId>|<containerName> // stops a container
+
+docker kill <containerid>|<containerName> // kills a container
+
+docker pause <containerId>|<containerName> //pause a container
+
+
+docker run // the command  , pull as well as create as well as run a container
+
+docker run -d --name mycontainer centos // -d is deamon, to run in background // this will fail because there is nothing to wait on, no entry point
+
+docker run -it --name mycontainer centos sh // create the centos container in a shell -it stands for interactive terminal
+
+docker cp // copy 
+
+docker build --<dockerfile-->
+
+docker search tomcat // 
+
+docker exec // execute a command inside a running container
+
+docker tag // allows you to tag a image by your name and version
+
+docker commit // converts a container into image
+
+docker inspect // allows you to inspect a state of container if running and give its details mountpoint memory cpu ip address and other running details
+
+docker info // allows you to view all docker host summary
+
+
+docker pull centos
+docker run -it --name mycontainer centos sh // create the centos container in a shell -it stands for interactive terminal
+yum update
+yum install httpd
+yum install net-tools 
+
+Day4.
+Docker continued
+create a folder -->copy jar inside it and create a file named Dockerfile
+
+Inside dockerfile-->
+
+FROM frolvlad/alpine-oraclejdk8:slim
+ADD myservice.jar myservice.jar
+ENTRYPOINT java -jar /myservice.jar
+
+copy the folder to linux box and go to that folder 
+docker build -t myfirstbuild:1.0 . // this myfirstbuild should be in small case
+
+To run the docker
+docker run -d -p<hostport>:<containerport> imagename:tag
+or
+docker run -d -p<hostport>:<containerport> imageid
+
+docker logs <containerId> -f
+
+To stop the firewall
+service firewalld stop
+
+to get the configurations
+ifconfig
+// get the ip address of the machine
+
+then call http://192.168.237.128:10800/account?accountid=2
