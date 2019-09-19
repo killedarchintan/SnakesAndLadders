@@ -26,4 +26,9 @@ Construct board as builder. homeowrok
 
 Day 2
 Steven brandt on buildings watch documentary 
+try to use less new class(), use DI instead. Basics of DI
+
+
+change snakes to decorator pattern, composition
+
 

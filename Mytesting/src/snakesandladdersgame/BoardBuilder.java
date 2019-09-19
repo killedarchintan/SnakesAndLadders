@@ -2,16 +2,20 @@
  * Controlguide
  * Copyright (c) Siemens Mobility GmbH 2019, All Rights Reserved, Confidential
  */
-package snakesAndLadders;
+package snakesandladdersgame;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BoardBuilder {
 
   private int size = 100;
   private List<Snake> snakes;
-  private Player player;
+  private List<Player> players;
+  private Map<Player, Integer> playerPosition;
+
   private Ladder ladder;
 
   public BoardBuilder addSnake(Snake snake) {
@@ -28,7 +32,12 @@ public class BoardBuilder {
   }
 
   public BoardBuilder addPlayer(Player player) {
-    this.player = player;
+    if (players == null) {
+      players = new ArrayList<>();
+      playerPosition = new HashMap<>();
+    }
+    players.add(player);
+    playerPosition.put(player, 0);
     return this;
   }
 
@@ -40,7 +49,7 @@ public class BoardBuilder {
         throw new IllegalArgumentException("Change ladder or Snake");
       }
     }
-    return new Board(snakes, player, ladder);
+    return new Board(snakes, players, ladder, playerPosition);
   }
   private void validateLadder(Ladder ladder) {
     if (ladder.getEndPosition() > size) {
@@ -61,6 +70,10 @@ public class BoardBuilder {
         }
       }
     }
+  }
+
+  public List<Player> getPlayers() {
+    return players;
   }
 
 }

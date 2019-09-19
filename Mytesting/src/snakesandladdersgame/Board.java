@@ -2,22 +2,25 @@
  * Controlguide
  * Copyright (c) Siemens Mobility GmbH 2019, All Rights Reserved, Confidential
  */
-package snakesAndLadders;
+package snakesandladdersgame;
 
 import java.util.List;
+import java.util.Map;
 
 // size is 100
 public class Board {
 
   private int size = 100;
   private List<Snake> snakes;
-  private Player player;
+  private List<Player> players;
   private Ladder ladder;
+  private Map<Player, Integer> playerPosition;
 
-  public Board(List<Snake> snakes, Player player, Ladder ladder) {
+  public Board(List<Snake> snakes, List<Player> players, Ladder ladder, Map<Player, Integer> playerPosition) {
     this.snakes = snakes;
-    this.player = player;
+    this.players = players;
     this.ladder = ladder;
+    this.playerPosition = playerPosition;
   }
 
   public int getSize() {
@@ -36,12 +39,8 @@ public class Board {
     this.snakes = snakes;
   }
 
-  public Player getPlayer() {
-    return player;
-  }
-
-  public void setPlayer(Player player) {
-    this.player = player;
+  public List<Player> getPlayers() {
+    return players;
   }
 
   public Ladder getLadder() {
@@ -52,14 +51,13 @@ public class Board {
     this.ladder = ladder;
   }
 
-  public int movePlayer(int numberDrawn) {
-    int newPosition = player.move(numberDrawn,size);
+  public int movePlayer(int numberDrawn, Player player) {
+    int newPosition = player.move(numberDrawn, size);
     for(Snake snake:snakes) {
       if (newPosition == snake.getMouth()) {
         System.out.println("player name " + player.getName() + "new position :" + newPosition);
         System.out.println("HISSsssssssss " + "You have been bitten by a snake");
-        player.setPosition(snake.getTail());
-        newPosition = player.getPosition();
+        newPosition = snake.bite(player);
       }
     }
     if (newPosition == ladder.getStartPosition()) {

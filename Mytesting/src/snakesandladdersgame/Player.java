@@ -2,7 +2,7 @@
  * Controlguide
  * Copyright (c) Siemens Mobility GmbH 2019, All Rights Reserved, Confidential
  */
-package snakesAndLadders;
+package snakesandladdersgame;
 
 //start position is 0
 public class Player {
@@ -37,8 +37,8 @@ public class Player {
     return position;
   }
 
-  public int rollDice() {
-    return Dice.roll();
+  public int rollDice(Dice dice) {
+    return dice.roll();
   }
 
 }

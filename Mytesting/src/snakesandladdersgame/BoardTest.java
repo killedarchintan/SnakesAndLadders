@@ -5,7 +5,7 @@
 /**
  * 
  */
-package snakesAndLadders;
+package snakesandladdersgame;
 
 import static org.junit.Assert.*;
 
@@ -37,11 +37,11 @@ class BoardTest {
   }
 
   /**
-   * Test method for {@link snakesAndLadders.Board#movePlayer(int)}.
+   * Test method for {@link snakesandladdersgame.Board#movePlayer(int)}.
    */
   @Test
   void testMovePlayer() {
-    int numberDrawn = 2;
+    int numberDrawn = 5;
     List<Snake> snakes = new ArrayList<>();
     snakes.add(new Snake(5, 3));
     Board board = new Board(snakes, new Player("Tejas"), new Ladder(3, 8));

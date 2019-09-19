@@ -2,7 +2,7 @@
  * Controlguide
  * Copyright (c) Siemens Mobility GmbH 2019, All Rights Reserved, Confidential
  */
-package snakesAndLadders;
+package snakesandladdersgame;
 
 //fixed start and end position
 public class Snake {
@@ -32,6 +32,11 @@ public class Snake {
 
   public void setTail(int tail) {
     this.tail = tail;
+  }
+
+  public int bite(Player player) {
+    player.setPosition(this.getTail());
+    return player.getPosition();
   }
 
 }
