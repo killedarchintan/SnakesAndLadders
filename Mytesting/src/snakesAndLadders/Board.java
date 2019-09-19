@@ -13,27 +13,9 @@ public class Board {
   private Ladder ladder;
 
   public Board(Snake snake, Player player, Ladder ladder) {
-    validateSnake(snake);
-    validateLadder(ladder);
-    if (snake.getMouth() == ladder.getStartPosition()) {
-      throw new IllegalArgumentException("Change ladder or Snake");
-    }
     this.snake = snake;
     this.player = player;
     this.ladder = ladder;
-  }
-
-  private void validateLadder(Ladder ladder) {
-    if (ladder.getEndPosition() > size) {
-      throw new IllegalArgumentException("ladder is not fit for board");
-    }
-  }
-
-  private void validateSnake(Snake snake) {
-    if (snake.getMouth() > size)
-    {
-      throw new IllegalArgumentException("Snake is not fit for board");
-    }
   }
 
   public int getSize() {

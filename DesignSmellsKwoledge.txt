@@ -7,3 +7,23 @@ identify nouns
 nouns:- 
 Board, Players, Dice
 you have to take assumption in design, sometimes it reduces the scope and soemtimes it increases.
+Implicit assumption and explicit assumption. 
+mousefeed plugin for shortcuts
+
+
+Template method pattern 
+Abstr
+
+concepts of Invariant in JAva
+Assertion1- Field variables represent state of an object.
+Assertion2:- Immutable state makes reasoning easy.
+Assertion 3 :- Field setters mutate the state of the object.
+
+Setter are Bad
+
+Construct board as builder. homeowrok
+
+
+Day 2
+Steven brandt on buildings watch documentary 
+

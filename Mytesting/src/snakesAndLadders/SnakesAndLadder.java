@@ -15,7 +15,9 @@ public class SnakesAndLadder {
     Player player = new Player("komal");
     Snake snake = new Snake(95, 13);
     Ladder ladder = new Ladder(35, 50);
-    Board board = new Board(snake, player, ladder);
+    BoardBuilder boardBuilder= new BoardBuilder();
+    Board board = boardBuilder.addSnake(snake).addLadder(ladder).addPlayer(player).build();
+    //Board board = new Board(snake, player, ladder);
     int position = 0;
 
     while (player.getPosition() < board.getSize()) {
