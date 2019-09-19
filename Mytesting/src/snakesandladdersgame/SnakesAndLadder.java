@@ -25,7 +25,7 @@ public class SnakesAndLadder {
     Snake greenSnake = new GreenSnake(14, 4, false);
     BoardBuilder boardBuilder= new BoardBuilder();
     Board board = boardBuilder.addSnake(snake1).addSnake(greenSnake)
-        .addLadder(ladder).addPlayer(komal).addPlayer(chintan).build();
+        .addLadder(ladder).addPlayer(komal).addPlayer(chintan).addSnake(snake2).build();
     int position = 0;
     int countOfTurns = 1;
 

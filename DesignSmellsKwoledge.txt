@@ -33,4 +33,11 @@ change snakes to decorator pattern, composition
 
 create strategic pattern for listIterator for creating reverse iterator.
 
+constructors are not 00,
+
+New is BAd
+
+Always do unit testing.
+
+
 
