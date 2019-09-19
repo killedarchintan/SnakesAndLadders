@@ -31,4 +31,6 @@ try to use less new class(), use DI instead. Basics of DI
 
 change snakes to decorator pattern, composition
 
+create strategic pattern for listIterator for creating reverse iterator.
+
 
