@@ -13,11 +13,11 @@ public class SnakesAndLadder {
 
 
     Player player = new Player("komal");
-    Snake snake = new Snake(95, 13);
-    Ladder ladder = new Ladder(35, 50);
+    Snake snake1 = new Snake(95, 13);
+    Ladder ladder = new Ladder(2, 50);
+    Snake snake2 = new Snake(13, 2);
     BoardBuilder boardBuilder= new BoardBuilder();
-    Board board = boardBuilder.addSnake(snake).addLadder(ladder).addPlayer(player).build();
-    //Board board = new Board(snake, player, ladder);
+    Board board = boardBuilder.addSnake(snake1).addSnake(snake2).addLadder(ladder).addPlayer(player).build();
     int position = 0;
 
     while (player.getPosition() < board.getSize()) {
@@ -25,7 +25,6 @@ public class SnakesAndLadder {
       System.out.println("Number drawn: " + numberDrawn);
       position = board.movePlayer(numberDrawn);
       System.out.println("player name " + player.getName() + "new position :" + position);
-
     }
     System.out.println("THE WINNER :- " + player.getName());
 
